@@ -14,11 +14,11 @@ ADD start.sh /start.sh
 RUN apt-get -qq update \
     && apt-get -qq install -y \
     bsdtar \
-    sudo \
     && apt-get -qq clean \
     && apt-get -qq autoremove --purge -y \
     && useradd -u ${JTS3_UID} ${JTS3_USER} \
-    && chown ${JTS3_USER}:${JTS3_USER} /start.sh \
+    && chown ${JTS3_USER} /start.sh \
+    $$ chown -R ${JTS3_USER} ${JTS3_DIR}
     && chmod 755 /start.sh \
     && mkdir -p ${JTS3_DIR} \
     && mkdir -p ${JTS3_TEMP_DIR} \
