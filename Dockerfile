@@ -14,7 +14,6 @@ RUN apt-get -qq update && \
     && \
     apt-get -qq clean && \
     apt-get -qq autoremove --purge -y && \
-    chmod 755 start.sh && \
     mkdir -p "$JTS3_DIR" && \
     mkdir -p "JTS3_TEMP_DIR" && \
     wget -q -O- "$JTS3SERVERMOD_URL" | \
@@ -29,7 +28,7 @@ RUN apt-get -qq update && \
 WORKDIR "$JTS3_DIR"
 
 USER jts3servermod
-ENTRYPOINT ["start.sh"]
+ENTRYPOINT ["/start.sh"]
 VOLUME ["$JTS3_DIR"]
 
 # pass parameters to entrypoint
