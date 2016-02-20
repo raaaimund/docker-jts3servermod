@@ -14,6 +14,7 @@ ADD start.sh /start.sh
 RUN apt-get -qq update \
     && apt-get -qq install -y \
     bsdtar \
+    sudo \
     && apt-get -qq clean \
     && apt-get -qq autoremove --purge -y \
     && useradd -u ${JTS3_UID} ${JTS3_USER} \
