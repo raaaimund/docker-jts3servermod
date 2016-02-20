@@ -19,9 +19,6 @@ RUN apt-get -qq update \
     && useradd -u ${JTS3_UID} ${JTS3_USER} \
     && mkdir -p ${JTS3_DIR} \
     && mkdir -p ${JTS3_TEMP_DIR} \
-    && chown ${JTS3_USER} /start.sh \
-    && chown -R ${JTS3_USER} ${JTS3_DIR} \
-    && chmod 755 /start.sh \
     && wget -q -O- ${JTS3SERVERMOD_URL} \
     # -O- load .zip in stdout
     | bsdtar -xf- -C ${JTS3_TEMP_DIR} \
@@ -29,6 +26,9 @@ RUN apt-get -qq update \
     && cp -rfn "$JTS3_TEMP_DIR/JTS3ServerMod/config" "$JTS3_DIR/config" \
     && cp -rfn "$JTS3_TEMP_DIR/JTS3ServerMod/plugins" "$JTS3_DIR/plugins" \
     && cp -rf "$JTS3_TEMP_DIR/JTS3ServerMod/JTS3ServerMod.jar" "$JTS3_DIR/JTS3ServerMod.jar" \
+    && chown ${JTS3_USER} /start.sh \
+    && chown -R ${JTS3_USER} ${JTS3_DIR} \
+    && chmod 755 /start.sh \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ${JTS3_TEMP_DIR}
 
 WORKDIR ${JTS3_DIR}
