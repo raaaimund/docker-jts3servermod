@@ -6,8 +6,7 @@ ENV JTS3SERVERMOD_URL http://www.stefan1200.de/dlrequest.php?file=jts3servermod&
 ENV JTS3_DIR="/home/jts3servermod"
 ENV JTS3_JAVA_ARGS="-Xmx256M"
 
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod 755 /entrypoint.sh && \
+RUN chmod 755 /start.sh && \
     apt-get -qq update && \
     apt-get -qq install bsdtar sudo -y && \
     mkdir -p "$JTS3_DIR" && \
@@ -22,7 +21,7 @@ RUN chmod 755 /entrypoint.sh && \
 WORKDIR "$JTS3_DIR"
 
 USER jts3servermod
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/start.sh"]
 VOLUME ["$JTS3_DIR/config"]
 
 # pass arguments to script
