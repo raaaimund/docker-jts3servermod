@@ -17,6 +17,8 @@ RUN apt-get -qq update \
     && apt-get -qq clean \
     && apt-get -qq autoremove --purge -y \
     && useradd -u ${JTS3_UID} ${JTS3_USER} \
+    && chown ${JTS3_USER}:${JTS3_USER} /start.sh \
+    && chmod 755 /start.sh \
     && mkdir -p ${JTS3_DIR} \
     && mkdir -p ${JTS3_TEMP_DIR} \
     && wget -q -O- ${JTS3SERVERMOD_URL} \
