@@ -15,7 +15,7 @@ RUN apt-get -qq update && \
     apt-get -qq clean && \
     apt-get -qq autoremove --purge -y && \
     mkdir -p "$JTS3_DIR" && \
-    mkdir -p "JTS3_TEMP_DIR" && \
+    mkdir -p "$JTS3_TEMP_DIR" && \
     wget -q -O- "$JTS3SERVERMOD_URL" | \
     # -O- load .zip in stdout
     bsdtar -xf- -C "$JTS3_TEMP_DIR" && \
