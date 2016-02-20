@@ -9,6 +9,8 @@ ENV JTS3_JAVA_ARGS "-Xmx256M"
 ENV JTS3_USER "jts3servermod"
 ENV JTS3_UID 1000
 
+ADD start.sh /start.sh
+
 RUN apt-get -qq update \
     && apt-get -qq install -y \
     bsdtar \
