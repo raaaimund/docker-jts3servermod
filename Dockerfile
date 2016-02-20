@@ -4,25 +4,33 @@ MAINTAINER raimund@rittnauer.at
 
 ENV JTS3SERVERMOD_URL http://www.stefan1200.de/dlrequest.php?file=jts3servermod&type=.zip
 ENV JTS3_DIR="/home/jts3servermod"
+ENV JTS3_TEMP_DIR="/home/temp"
 ENV JTS3_JAVA_ARGS="-Xmx256M"
 
-RUN chmod 755 /start.sh && \
-    apt-get -qq update && \
-    apt-get -qq install bsdtar sudo -y && \
-    mkdir -p "$JTS3_DIR" && \
-    wget -q -O- "$JTS3SERVERMOD_URL" | \
-    bsdtar -xf- -C "$JTS3_DIR" && \
-    rm -rf "$JTS3_DIR/tools" "$JTS3_DIR/readme*" "$JTS3_DIR/documents" "$JTS3_DIR/changelog.txt" && \
-    cp -rf "$JTS3_DIR/config" "$JTS3_DIR/default_config" && \
+RUN apt-get -qq update && \
+    apt-get -qq install -y \
+    bsdtar \
+    sudo \
+    && \
     apt-get -qq clean && \
     apt-get -qq autoremove --purge -y && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    chmod 755 /start.sh && \
+    mkdir -p "$JTS3_DIR" && \
+    mkdir -p "JTS3_TEMP_DIR" && \
+    wget -q -O- "$JTS3SERVERMOD_URL" | \
+    # -O- load .zip in stdout
+    bsdtar -xf- -C "$JTS3_TEMP_DIR" && \
+    rm -rf "$JTS3_TEMP_DIR/JTS3ServerMod/tools" "$JTS3_TEMP_DIR/JTS3ServerMod/readme*" "$JTS3_TEMP_DIR/JTS3ServerMod/documents" "JTS3_TEMP_DIR/JTS3ServerMod/changelog.txt" && \
+    cp -rfn "$JTS3_TEMP_DIR/JTS3ServerMod/config" "$JTS3_DIR/config" && \
+    cp -rfn "$JTS3_TEMP_DIR/JTS3ServerMod/plugins" "$JTS3_DIR/plugins" && \
+    cp -rf "$JTS3_TEMP_DIR/JTS3ServerMod/JTS3ServerMod.jar" "$JTS3_DIR/JTS3ServerMod.jar" && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* "$JTS3_TEMP_DIR"
 
 WORKDIR "$JTS3_DIR"
 
 USER jts3servermod
 ENTRYPOINT ["/start.sh"]
-VOLUME ["$JTS3_DIR/config"]
+VOLUME ["$JTS3_DIR"]
 
-# pass arguments to script
+# pass parameters to entrypoint
 CMD [""]
