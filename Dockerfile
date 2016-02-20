@@ -25,7 +25,7 @@ RUN apt-get -qq update \
     && cp -rfn "$JTS3_TEMP_DIR/JTS3ServerMod/plugins" "$JTS3_DIR/plugins" \
     && cp -rf "$JTS3_TEMP_DIR/JTS3ServerMod/JTS3ServerMod.jar" "$JTS3_DIR/JTS3ServerMod.jar" \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ${JTS3_TEMP_DIR} \
-    java ${JTS3_JAVA_ARGS} -jar "$JTS3_DIR/JTS3ServerMod.jar"
+    && java ${JTS3_JAVA_ARGS} -jar "$JTS3_DIR/JTS3ServerMod.jar"
 
 WORKDIR "$JTS3_DIR"
 
