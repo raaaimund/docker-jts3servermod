@@ -20,7 +20,7 @@ RUN apt-get -qq update \
     && mkdir -p ${JTS3_DIR} \
     && mkdir -p ${JTS3_TEMP_DIR} \
     && wget -q -O- ${JTS3SERVERMOD_URL} \
-    # -O- load .zip in stdout
+    # -O- load .zip in stdout and pipe to bsdtar
     | bsdtar -xf- -C ${JTS3_TEMP_DIR} \
     && rm -rf "$JTS3_TEMP_DIR/JTS3ServerMod/tools" "$JTS3_TEMP_DIR/JTS3ServerMod/readme*" "$JTS3_TEMP_DIR/JTS3ServerMod/documents" "JTS3_TEMP_DIR/JTS3ServerMod/changelog.txt" \
     && cp -rfn "$JTS3_TEMP_DIR/JTS3ServerMod/config" "$JTS3_DIR/config" \
