@@ -8,14 +8,14 @@ Java 8 JRE with JTS3Servermod.
   * /plugins
   
 ## Usage
-The default UID of the user is 1000.
+The default UID of the user which is used in the container is 1000.
 So if you mount a directory from your host you have to set the permissions to the user with the UID of 1000.
 ```
 useradd -u 1000 jts3servermod
 chown -R jts3servermod {FOLDER}
 ```
 	
-#### Mounted Host-directory
+#### Mount Host-directory
 ```
 docker run --name jts3servermod -d -v {FOLDER}:/home/jts3servermod raaaimund/docker-jts3servermod:latest
 ```
