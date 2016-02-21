@@ -7,7 +7,7 @@ ENV JTS3_DIR "/home/jts3servermod"
 ENV JTS3_TEMP_DIR "/home/temp"
 ENV JTS3_JAVA_ARGS "-Xmx256M"
 ENV JTS3_USER "jts3servermod"
-ENV JTS3_UID 2000
+ENV JTS3_UID 1000
 
 ADD start.sh /start.sh
 
