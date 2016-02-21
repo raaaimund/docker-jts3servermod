@@ -3,9 +3,9 @@ Java 8 JRE with JTS3Servermod.
 
 ### Summary
 * Java 8 JRE and latest version of JTS3Servermod
-* The configuration can be injected to the host:
+* You can inject your configuration files and your plugins to the container:
   * /config
-  * /plugins
+  * /plugins (not tested)
   
 ## Usage
 The default UID of the user which is used in the container is 1000.
